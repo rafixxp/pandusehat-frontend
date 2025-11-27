@@ -25,13 +25,14 @@ onBeforeMount(async () => {
 
 <template>
     <div class="container mt-2 pt-3 px-4 pb-5">
-        <div class="row">
+        <div class="row pb-5">
              <div class="col-12 p-3 bg-white border rounded mt-2" v-for="item in data" @click="detail(item.id)">
                 <div class="row">
                     <div class="col-10">
                         <h6 class="fs-14 fw-bold m-0 p-0 pb-2">{{ item.tgl }}</h6>
                         <p class="text-muted fs-21 p-0 mb-2">{{ item.nama }} - {{ item.umur }} Tahun</p>
                         <span class="fs-21 bg-primary text-white px-2 py-1 rounded me-1">Selesai</span>
+
                         <!-- <span class="fs-21 bg-danger text-white px-2 py-1 rounded">Obesitas</span> -->
                     </div>
                     <div class="col-2 text-end">

@@ -13,7 +13,7 @@ const back = () => {
 </script>
 
 <template>
-    <div class="bg-white pt-2 pb-1 position-fixed top-0 w-100">
+    <div class="bg-white pt-2 pb-2 position-fixed top-0 w-100 shadow-sm">
         <div class="container">
             <div class="row">
                <div class="col-3">

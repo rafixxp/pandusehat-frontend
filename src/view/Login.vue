@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
+import Swal from 'sweetalert2'
 
 const router = useRouter();
 
@@ -23,8 +24,14 @@ const login = async() => {
 
         router.push('/')
     }
+    else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal',
+            text: 'Email atau password salah',
+        })
+    }
 }
-
 </script>
 
 <template>

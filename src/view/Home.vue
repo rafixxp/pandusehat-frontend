@@ -7,6 +7,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 const user = JSON.parse(localStorage.getItem('user'));
+const rekomendasi = ref('');
 const token = localStorage.getItem('token')
 
 const progress = ref([]);
@@ -23,13 +24,20 @@ onBeforeMount(async () => {
             }
         })
 
+        const rekomendasiRes = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/rekomendasi`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+
+        rekomendasi.value = rekomendasiRes.data
+
         progress.value = res.data
     }
     catch(error){
         console.log(error);
     }
 })
-
 
 </script>
 
@@ -46,8 +54,8 @@ onBeforeMount(async () => {
         </div>
 
         <h6 class="fw-bold mb-3 px-1 fs-13 mt-3">Rekomendasi</h6>
-        <div class="bg-primary p-3 rounded mt-2 text-white">
-            <span class="text-justify fs-13">✨Rekomendasi:✨ Pastikan anak mendapatkan asupan makanan yang bergizi seimbang dan cukup kalori. Tingkatkan frekuensi pemberian makan dan porsi makan. Konsultasikan dengan dokter atau ahli gizi untuk mendapatkan rencana makan yang sesuai dengan kebutuhan anak. Pantau berat badan anak secara teratur. Berikan dukungan dan semangat agar anak tetap bersemangat makan! 💖</span>
+        <div :class="rekomendasi.z_score <= -3 || rekomendasi.z_score < -2 && rekomendasi.z_score > -3 ? 'bg-danger' : 'primary'" class="p-3 rounded mt-2 text-white">
+            <span class="text-justify fs-13" v-html="rekomendasi.rekomendasi"></span>
         </div>
         
         <div class="bg-transparent mt-4 mb-5 pb-4 px-1">
@@ -75,7 +83,7 @@ onBeforeMount(async () => {
     background-color: #0048ffe9 !important;
 }
 .text-justify{
-    text-align: justify;
+    text-align: justify !important;
 }
 .fs-14{
     font-size: 13px;
